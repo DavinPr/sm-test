@@ -21,6 +21,8 @@ class InputNameFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        activity?.title = getString(R.string.input_name_actionbar)
+
         _binding = FragmentInputNameBinding.inflate(inflater, container, false)
         return binding.root
     }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.FragmentChoiceBinding
 import com.suitmedia.suitmediatest.ui.event.EventActivity
 import com.suitmedia.suitmediatest.ui.guest.GuestActivity
@@ -24,6 +25,8 @@ class ChoiceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
+        activity?.title = getString(R.string.choice_actionbar)
+
         _binding = FragmentChoiceBinding.inflate(inflater, container, false)
         return binding.root
     }

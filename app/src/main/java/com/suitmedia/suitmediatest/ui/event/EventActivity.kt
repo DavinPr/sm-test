@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.ActivityEventBinding
 import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
 import com.suitmedia.suitmediatest.utils.toPresentation
@@ -21,6 +22,8 @@ class EventActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = getString(R.string.event_actionbar)
 
         val eventAdapter = EventListAdapter()
 

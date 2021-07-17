@@ -6,4 +6,8 @@
     <string name="next_text">Next</string>
     <string name="choose_event">Pilih event</string>
     <string name="choose_guest">Pilih guest</string>
+    <string name="input_name_actionbar">Input Name</string>
+    <string name="choice_actionbar">Choose Menu</string>
+    <string name="guest_actionbar">Guest</string>
+    <string name="event_actionbar">Event</string>
 </resources>

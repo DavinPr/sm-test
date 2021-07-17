@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.suitmedia.core.data.Resource
+import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.ActivityGuestBinding
 import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
 import com.suitmedia.suitmediatest.utils.toPresentation
@@ -23,6 +24,8 @@ class GuestActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityGuestBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.title = getString(R.string.guest_actionbar)
 
         val guestAdapter = GuestListAdapter()
 
