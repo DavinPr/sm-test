@@ -17,6 +17,14 @@ class ChoiceViewModel : ViewModel() {
         }
     }
 
+    fun isPrime(month : Int) : String {
+        if (month == 1) return "month is not prime"
+        for(i in 2 until month){
+            if (month % i == 0) return "month is not prime"
+        }
+        return "month is prime"
+    }
+
     private var _isPalindrome = MutableLiveData<String>()
     val isPalindrome : LiveData<String> get() = _isPalindrome
     fun palindromeCheck(text: String) {

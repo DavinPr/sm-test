@@ -73,8 +73,16 @@ class ChoiceFragment : Fragment() {
                 RESULT_FROM_GUEST -> {
                     val name = intent?.getStringExtra(GUEST_NAME)
                     val date = intent?.getIntExtra(GUEST_DATE, 0)
+                    val month = intent?.getIntExtra(GUEST_MONTH, 0)
                     binding.btnGuest.text = name
-                    showAlert(viewModel.toastByDate(date ?: 0))
+
+                    val toastByDate = viewModel.toastByDate(date ?: 0)
+                    val isPrime = viewModel.isPrime(month ?: 0)
+                    showAlert(
+                        """$toastByDate
+                        |$isPrime
+                    """.trimMargin()
+                    )
                 }
                 RESULT_FROM_EVENT -> {
                     val name = intent?.getStringExtra(EVENT_NAME)
@@ -87,6 +95,7 @@ class ChoiceFragment : Fragment() {
         const val NAME = "name_key"
         const val GUEST_NAME = "guest_name_key"
         const val GUEST_DATE = "guest_date_key"
+        const val GUEST_MONTH = "guest_month_key"
         const val EVENT_NAME = "event_name_key"
         const val RESULT_FROM_GUEST = 100
         const val RESULT_FROM_EVENT = 200

@@ -60,10 +60,13 @@ class GuestActivity : AppCompatActivity() {
         }
 
         guestAdapter.onClick = { guest ->
-            val date = guest.birthdate.split("-")[2]
+            val split = guest.birthdate.split("-")
+            val date = split[2]
+            val month = split[1]
             val intent = Intent()
             intent.putExtra(ChoiceFragment.GUEST_NAME, guest.name)
             intent.putExtra(ChoiceFragment.GUEST_DATE, date.toInt())
+            intent.putExtra(ChoiceFragment.GUEST_MONTH, month.toInt())
             setResult(ChoiceFragment.RESULT_FROM_GUEST, intent)
             finish()
         }
