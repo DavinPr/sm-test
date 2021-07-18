@@ -36,6 +36,14 @@ class ChoiceFragment : Fragment() {
 
         val name = arguments?.getString(NAME)
 
+        if (name != null) {
+            viewModel.palindromeCheck(name)
+        }
+
+        viewModel.isPalindrome.observe(viewLifecycleOwner, { result ->
+            showAlert(result)
+        })
+
         val textName = "Nama\t\t: $name"
         binding.textName.text = textName
 
@@ -49,12 +57,12 @@ class ChoiceFragment : Fragment() {
         }
     }
 
-    private fun showAlert(date: Int) {
+    private fun showAlert(message: String) {
         AlertDialog.Builder(requireContext())
-            .setPositiveButton("Ok") { dialogInterface, _ ->
-                dialogInterface.dismiss()
+            .setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss()
             }
-            .setMessage(viewModel.toastByDate(date))
+            .setMessage(message)
             .show()
     }
 
@@ -66,7 +74,7 @@ class ChoiceFragment : Fragment() {
                     val name = intent?.getStringExtra(GUEST_NAME)
                     val date = intent?.getIntExtra(GUEST_DATE, 0)
                     binding.btnGuest.text = name
-                    showAlert(date ?: 0)
+                    showAlert(viewModel.toastByDate(date ?: 0))
                 }
                 RESULT_FROM_EVENT -> {
                     val name = intent?.getStringExtra(EVENT_NAME)

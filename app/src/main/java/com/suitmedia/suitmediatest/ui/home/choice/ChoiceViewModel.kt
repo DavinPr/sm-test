@@ -1,5 +1,7 @@
 package com.suitmedia.suitmediatest.ui.home.choice
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ChoiceViewModel : ViewModel() {
@@ -13,5 +15,24 @@ class ChoiceViewModel : ViewModel() {
         } else {
             "Feature Phone"
         }
+    }
+
+    private var _isPalindrome = MutableLiveData<String>()
+    val isPalindrome : LiveData<String> get() = _isPalindrome
+    fun palindromeCheck(text: String) {
+        val noSpaceText = text.replace("\\s".toRegex(), "")
+
+        var start = 0
+        var end = noSpaceText.length-1
+        while (start < end){
+            if (noSpaceText[start] != noSpaceText[end]){
+                _isPalindrome.postValue("not palindrome")
+                return
+            }
+            start++
+            end--
+        }
+        //0123456789
+        _isPalindrome.postValue("isPalindrome")
     }
 }
