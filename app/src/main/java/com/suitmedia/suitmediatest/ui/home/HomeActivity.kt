@@ -1,7 +1,9 @@
 package com.suitmedia.suitmediatest.ui.home
 
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.ActivityHomeBinding
 import com.suitmedia.suitmediatest.ui.home.inputname.InputNameFragment
 
@@ -10,6 +12,9 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= 23){
+            setTheme(R.style.transparent_status_bar)
+        }
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)

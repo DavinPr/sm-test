@@ -18,4 +18,10 @@
         <item name="colorControlActivated">@color/colorControlActivated</item>
         <item name="colorControlHighlight">@color/colorControlHighlight</item>
     </style>
+
+    <style name="transparent_status_bar" parent="Theme.SuitmediaTest">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>
