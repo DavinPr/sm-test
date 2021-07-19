@@ -10,5 +10,5 @@ fun GuestDomain.toPresentation() : Guest = Guest(
 )
 
 fun EventDomain.toPresentation() : Event = Event(
-    image, name, date
+    image, name, date, detail, lat, lng
 )

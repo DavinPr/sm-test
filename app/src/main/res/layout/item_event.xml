@@ -9,39 +9,53 @@
 
     <ImageView
         android:id="@+id/event_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        tools:src="@tools:sample/avatars"
+        android:layout_width="175dp"
+        android:layout_height="200dp"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/event_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        tools:text="Abc Event"
-        android:textSize="16sp"
         android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/event_image"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/event_image"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/event_image"
-        app:layout_constraintBottom_toTopOf="@id/event_date"/>
+        tools:text="Abc Event" />
 
     <TextView
         android:id="@+id/event_date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/event_image"
+        android:textSize="14sp"
+        android:textColor="@color/gold"
+        android:layout_marginTop="8dp"
+        android:maxLines="1"
         app:layout_constraintEnd_toEndOf="@+id/event_name"
         app:layout_constraintStart_toStartOf="@+id/event_name"
         app:layout_constraintTop_toBottomOf="@+id/event_name"
         tools:text="15 Sept 2014" />
 
+    <TextView
+        android:id="@+id/event_detail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="6"
+        app:layout_constraintBottom_toBottomOf="@+id/event_image"
+        app:layout_constraintEnd_toEndOf="@+id/event_date"
+        app:layout_constraintStart_toStartOf="@+id/event_date"
+        app:layout_constraintTop_toBottomOf="@+id/event_date"
+        tools:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

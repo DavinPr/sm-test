@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_validation"
     tools:context=".ui.home.choice.ChoiceFragment">
 
     <TextView
@@ -12,35 +13,40 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:gravity="center"
-        tools:text="Nama\t\t : Aditya Davin Pradana"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@id/btn_event"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="packed"/>
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Nama\t\t : Aditya Davin Pradana" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_event"
+        style="@style/OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:layout_marginTop="18dp"
+        android:padding="16dp"
         android:text="@string/choose_event"
         android:textAllCaps="false"
         app:cornerRadius="10dp"
+        app:layout_constraintBottom_toTopOf="@id/btn_guest"
         app:layout_constraintEnd_toEndOf="@+id/text_name"
         app:layout_constraintStart_toStartOf="@+id/text_name"
-        app:layout_constraintTop_toBottomOf="@+id/text_name"
-        app:layout_constraintBottom_toTopOf="@id/btn_guest"/>
+        app:layout_constraintTop_toBottomOf="@+id/text_name" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_guest"
+        style="@style/OutlinedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/choose_guest"
         android:textAllCaps="false"
+        android:padding="16dp"
         app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btn_event"

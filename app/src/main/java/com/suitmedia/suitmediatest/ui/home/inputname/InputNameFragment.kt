@@ -1,11 +1,10 @@
 package com.suitmedia.suitmediatest.ui.home.inputname
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.FragmentInputNameBinding
 import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
@@ -29,10 +28,6 @@ class InputNameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding.tidtName.doOnTextChanged { text, _, _, _ ->
-            binding.btnNext.isEnabled = !text.isNullOrEmpty()
-        }
 
         binding.btnNext.setOnClickListener {
             val targetFragment = ChoiceFragment().apply {

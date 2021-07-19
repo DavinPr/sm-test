@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.suitmedia.core.data.Resource
 import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.ActivityGuestBinding
 import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
 import com.suitmedia.suitmediatest.utils.toPresentation
-import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GuestActivity : AppCompatActivity() {
@@ -29,30 +27,32 @@ class GuestActivity : AppCompatActivity() {
 
         val guestAdapter = GuestListAdapter()
 
-        lifecycleScope.launchWhenCreated {
-            viewModel.getGuest.collect { resource ->
-                when (resource) {
-                    is Resource.Loading -> {
-                        setLoadingIndicator(true)
+        viewModel.requestGuest()
+        viewModel.getGuest.observe(this, { resource ->
+            when (resource) {
+                is Resource.Loading -> {
+                    setLoadingIndicator(true)
+                    guestAdapter.setList(listOf())
+                    binding.textError.visibility = View.GONE
+                }
+                is Resource.Success -> {
+                    setLoadingIndicator(false)
+                    val data = resource.data
+                    if (data != null) {
+                        binding.textError.visibility = View.GONE
+                        guestAdapter.setList(data.map { it.toPresentation() })
                     }
-                    is Resource.Success -> {
-                        setLoadingIndicator(false)
-                        val data = resource.data
-                        if (data != null) {
-                            guestAdapter.setList(data.map { it.toPresentation() })
-                        }
-                    }
-                    is Resource.Error -> {
-                        setLoadingIndicator(false)
-                        binding.textError.apply {
-                            visibility = View.VISIBLE
-                            text = resource.message
-                        }
+                }
+                is Resource.Error -> {
+                    setLoadingIndicator(false)
+                    guestAdapter.setList(listOf())
+                    binding.textError.apply {
+                        visibility = View.VISIBLE
+                        text = resource.message
                     }
                 }
             }
-        }
-
+        })
         binding.rvGuest.apply {
             layoutManager = GridLayoutManager(this@GuestActivity, 2)
             hasFixedSize()
@@ -69,6 +69,11 @@ class GuestActivity : AppCompatActivity() {
             intent.putExtra(ChoiceFragment.GUEST_MONTH, month.toInt())
             setResult(ChoiceFragment.RESULT_FROM_GUEST, intent)
             finish()
+        }
+
+        binding.refresh.setOnRefreshListener {
+            viewModel.requestGuest()
+            binding.refresh.isRefreshing = false
         }
     }
 

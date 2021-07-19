@@ -10,5 +10,5 @@ fun GuestResponse.toDomain(index: Int) : GuestDomain = GuestDomain(
 )
 
 fun EventModel.toDomain() : EventDomain = EventDomain(
-    image, name, date
+    image, name, date, detail, lat, lng
 )
