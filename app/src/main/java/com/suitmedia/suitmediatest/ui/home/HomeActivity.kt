@@ -7,7 +7,6 @@ import com.suitmedia.suitmediatest.databinding.ActivityHomeBinding
 import com.suitmedia.suitmediatest.ui.home.inputname.InputNameFragment
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class HomeActivity : AppCompatActivity() {
 
@@ -33,7 +32,6 @@ class HomeActivity : AppCompatActivity() {
                                 it,
                                 tag
                             )
-                            addToBackStack(null)
                             commit()
                         }
                     }
