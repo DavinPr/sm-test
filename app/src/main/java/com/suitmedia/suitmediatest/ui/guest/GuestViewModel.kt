@@ -1,32 +1,24 @@
 package com.suitmedia.suitmediatest.ui.guest
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.suitmedia.core.data.Resource
 import com.suitmedia.core.domain.usecase.IAppUseCase
 import com.suitmedia.core.domain.usecase.model.GuestDomain
-import kotlinx.coroutines.flow.collect
+import com.suitmedia.suitmediatest.model.Guest
+import com.suitmedia.suitmediatest.utils.toPresentation
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 class GuestViewModel(private val useCase: IAppUseCase) : ViewModel() {
-    private var _getGuest = MutableLiveData<Resource<List<GuestDomain>>>()
-    val getGuest : LiveData<Resource<List<GuestDomain>>> get() = _getGuest
-
-    fun requestGuest() {
+    private val _guest = MutableStateFlow<Resource<List<GuestDomain>>>(Resource.Success(listOf()))
+    val guest = _guest.asStateFlow()
+    fun requestGuestData() {
         viewModelScope.launch {
-            useCase.getGuests.collect {
-                when (it) {
-                    is Resource.Loading -> _getGuest.postValue(Resource.Loading())
-                    is Resource.Success -> {
-                        if (it.data != null) {
-                            _getGuest.postValue(Resource.Success(it.data!!))
-                        }
-                    }
-                    is Resource.Error -> _getGuest.postValue(Resource.Error(it.message ?: "Error"))
-                }
-            }
+            _guest.emitAll(useCase.getGuests)
         }
     }
 }

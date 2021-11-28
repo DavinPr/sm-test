@@ -8,10 +8,12 @@ import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.ActivityEventBinding
 import com.suitmedia.suitmediatest.ui.event.eventlist.EventListFragment
 import com.suitmedia.suitmediatest.ui.event.eventmap.MapsFragment
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EventActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEventBinding
+    private val viewModel by viewModel<EventViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

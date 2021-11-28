@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.suitmedia.suitmediatest.databinding.ItemEventBinding
 import com.suitmedia.suitmediatest.model.Event
-import com.suitmedia.suitmediatest.utils.FormatHelper
+import com.suitmedia.suitmediatest.utils.dateFormat
+import com.suitmedia.suitmediatest.utils.loadImage
 
 class EventListAdapter : RecyclerView.Adapter<EventListAdapter.EventListViewHolder>() {
 
@@ -35,11 +36,11 @@ class EventListAdapter : RecyclerView.Adapter<EventListAdapter.EventListViewHold
     inner class EventListViewHolder(private val binding: ItemEventBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: Event) {
-            binding.eventDate.text = FormatHelper.dateFormat(item.date)
+            binding.eventDate.text = item.date.dateFormat()
             binding.eventName.text = item.name
             binding.eventDetail.text = item.detail
             Glide.with(itemView.context)
-                .load(FormatHelper.loadImage(itemView.context, item.image))
+                .load(itemView.context.loadImage(item.image))
                 .into(binding.eventImage)
         }
 

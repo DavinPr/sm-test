@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.suitmedia.suitmediatest.databinding.ItemEventHorizontalBinding
 import com.suitmedia.suitmediatest.model.Event
-import com.suitmedia.suitmediatest.utils.FormatHelper
+import com.suitmedia.suitmediatest.utils.loadImage
 
 class EventListMapAdapter : RecyclerView.Adapter<EventListMapAdapter.EventListMapViewHolder>() {
 
@@ -43,7 +43,7 @@ class EventListMapAdapter : RecyclerView.Adapter<EventListMapAdapter.EventListMa
         fun bind(item: Event) {
             binding.eventName.text = item.name
             Glide.with(itemView.context)
-                .load(FormatHelper.loadImage(itemView.context, item.image))
+                .load(itemView.context.loadImage(item.image))
                 .into(binding.eventImage)
         }
     }

@@ -1,32 +1,39 @@
 package com.suitmedia.suitmediatest.ui.home
 
-import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.suitmedia.suitmediatest.R
+import androidx.lifecycle.lifecycleScope
 import com.suitmedia.suitmediatest.databinding.ActivityHomeBinding
 import com.suitmedia.suitmediatest.ui.home.inputname.InputNameFragment
+import kotlinx.coroutines.flow.collect
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
+    private val viewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        if (Build.VERSION.SDK_INT >= 23){
-            setTheme(R.style.transparent_status_bar)
-        }
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().apply {
-            add(
-                binding.homeContainer.id,
-                InputNameFragment(),
-                InputNameFragment::class.java.simpleName
-            )
-            commit()
+        lifecycleScope.launchWhenStarted {
+            viewModel.fragment.collect {
+                if (it == null) {
+                    viewModel.setFragment(InputNameFragment())
+                } else {
+                    supportFragmentManager.beginTransaction().apply {
+                        replace(
+                            binding.homeContainer.id,
+                            it,
+                            it::class.java.simpleName
+                        )
+                        addToBackStack(null)
+                        commit()
+                    }
+                }
+            }
         }
-
     }
 }

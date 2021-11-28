@@ -34,12 +34,9 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
-        <activity android:name=".ui.event.EventActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.guest.GuestActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.home.HomeActivity"
-            android:screenOrientation="portrait">
+        <activity android:name=".ui.event.EventActivity" />
+        <activity android:name=".ui.guest.GuestActivity" />
+        <activity android:name=".ui.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -4,24 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.FragmentInputNameBinding
+import com.suitmedia.suitmediatest.ui.home.HomeViewModel
 import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class InputNameFragment : Fragment() {
 
-    private var _binding : FragmentInputNameBinding? = null
+    private var _binding: FragmentInputNameBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        activity?.title = getString(R.string.input_name_actionbar)
-
         _binding = FragmentInputNameBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -29,20 +30,13 @@ class InputNameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNext.setOnClickListener {
-            val targetFragment = ChoiceFragment().apply {
-                val bundle = Bundle().apply {
-                    putString(ChoiceFragment.NAME, binding.tidtName.text.toString())
-                }
-                arguments = bundle
-            }
-            val mFragmentManager = activity?.supportFragmentManager
+        binding.tidtName.doOnTextChanged { text, _, _, _ ->
+            binding.btnNext.isEnabled = !text.isNullOrEmpty()
+        }
 
-            mFragmentManager?.beginTransaction()?.apply {
-                replace(R.id.home_container, targetFragment, ChoiceFragment::class.java.simpleName)
-                addToBackStack(null)
-                commit()
-            }
+        binding.btnNext.setOnClickListener {
+            viewModel.setFragment(ChoiceFragment())
+            viewModel.setName(binding.tidtName.text.toString())
         }
 
     }
