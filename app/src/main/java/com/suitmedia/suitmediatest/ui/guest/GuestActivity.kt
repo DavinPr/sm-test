@@ -9,9 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.suitmedia.core.data.Resource
 import com.suitmedia.suitmediatest.databinding.ActivityGuestBinding
-import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
+import com.suitmedia.suitmediatest.utils.GUEST_DATE
+import com.suitmedia.suitmediatest.utils.GUEST_NAME
+import com.suitmedia.suitmediatest.utils.RESULT_FROM_GUEST
 import com.suitmedia.suitmediatest.utils.toPresentation
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class GuestActivity : AppCompatActivity() {
@@ -25,9 +27,9 @@ class GuestActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val guestAdapter = GuestListAdapter()
-
+        viewModel.requestGuestData()
         lifecycleScope.launchWhenCreated {
-            viewModel.getGuest.collect { resource ->
+            viewModel.guest.collectLatest { resource ->
                 when (resource) {
                     is Resource.Loading -> {
                         setLoadingIndicator(true)
@@ -59,9 +61,9 @@ class GuestActivity : AppCompatActivity() {
         guestAdapter.onClick = { guest ->
             val date = guest.birthdate.split("-")[2]
             val intent = Intent()
-            intent.putExtra(ChoiceFragment.GUEST_NAME, guest.name)
-            intent.putExtra(ChoiceFragment.GUEST_DATE, date.toInt())
-            setResult(ChoiceFragment.RESULT_FROM_GUEST, intent)
+            intent.putExtra(GUEST_NAME, guest.name)
+            intent.putExtra(GUEST_DATE, date.toInt())
+            setResult(RESULT_FROM_GUEST, intent)
             finish()
         }
     }

@@ -7,7 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.suitmedia.suitmediatest.databinding.ActivityEventBinding
-import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
+import com.suitmedia.suitmediatest.utils.EVENT_NAME
+import com.suitmedia.suitmediatest.utils.RESULT_FROM_EVENT
 import com.suitmedia.suitmediatest.utils.toPresentation
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -44,8 +45,8 @@ class EventActivity : AppCompatActivity() {
 
         eventAdapter.onClick = { name ->
             val intent = Intent()
-            intent.putExtra(ChoiceFragment.EVENT_NAME, name)
-            setResult(ChoiceFragment.RESULT_FROM_EVENT, intent)
+            intent.putExtra(EVENT_NAME, name)
+            setResult(RESULT_FROM_EVENT, intent)
             finish()
         }
     }

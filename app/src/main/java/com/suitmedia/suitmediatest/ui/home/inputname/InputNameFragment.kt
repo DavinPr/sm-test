@@ -1,20 +1,23 @@
 package com.suitmedia.suitmediatest.ui.home.inputname
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.Fragment
 import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.FragmentInputNameBinding
+import com.suitmedia.suitmediatest.ui.home.HomeViewModel
 import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
 class InputNameFragment : Fragment() {
 
-    private var _binding : FragmentInputNameBinding? = null
+    private var _binding: FragmentInputNameBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: HomeViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,19 +36,8 @@ class InputNameFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            val targetFragment = ChoiceFragment().apply {
-                val bundle = Bundle().apply {
-                    putString(ChoiceFragment.NAME, binding.tidtName.text.toString())
-                }
-                arguments = bundle
-            }
-            val mFragmentManager = activity?.supportFragmentManager
-
-            mFragmentManager?.beginTransaction()?.apply {
-                replace(R.id.home_container, targetFragment, ChoiceFragment::class.java.simpleName)
-                addToBackStack(null)
-                commit()
-            }
+            viewModel.setFragment(ChoiceFragment())
+            viewModel.setName(String.format(resources.getString(R.string.name), binding.tidtName.text.toString()))
         }
 
     }

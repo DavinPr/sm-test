@@ -6,4 +6,5 @@
     <string name="next_text">Next</string>
     <string name="choose_event">Pilih event</string>
     <string name="choose_guest">Pilih guest</string>
+    <string name="name">Nama : %1$s</string>
 </resources>
