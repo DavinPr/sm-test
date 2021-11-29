@@ -23,14 +23,17 @@ class HomeActivity : AppCompatActivity() {
                 if (it == null) {
                     viewModel.setFragment(InputNameFragment())
                 } else {
-                    supportFragmentManager.beginTransaction().apply {
-                        replace(
-                            binding.homeContainer.id,
-                            it,
-                            it::class.java.simpleName
-                        )
-                        addToBackStack(null)
-                        commit()
+                    val tag = it::class.java.simpleName
+                    if (tag != viewModel.fragmentTag.value) {
+                        viewModel.setFragmentTag(tag)
+                        supportFragmentManager.beginTransaction().apply {
+                            replace(
+                                binding.homeContainer.id,
+                                it,
+                                tag
+                            )
+                            commit()
+                        }
                     }
                 }
             }
