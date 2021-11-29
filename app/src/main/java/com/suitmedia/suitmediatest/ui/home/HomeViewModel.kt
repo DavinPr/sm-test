@@ -1,31 +1,17 @@
 package com.suitmedia.suitmediatest.ui.home
 
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.suitmedia.suitmediatest.utils.fizzBuzzByDate
 import com.suitmedia.suitmediatest.utils.isPalindrome
 import com.suitmedia.suitmediatest.utils.isPrime
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
-
-    private val _fragmentTag = MutableStateFlow("Your fragmentTag")
-    val fragmentTag = _fragmentTag.asStateFlow()
-    fun setFragmentTag(fragmentTag: String) {
-        viewModelScope.launch {
-            _fragmentTag.emit(fragmentTag)
-        }
-    }
-
-    private val _fragment = MutableStateFlow<Fragment?>(null)
-    val fragment = _fragment.asStateFlow()
-    fun setFragment(fragment: Fragment) {
-        viewModelScope.launch {
-            _fragment.emit(fragment)
-        }
-    }
 
     private val _isPalindrome = MutableStateFlow("Your name")
     val isPalindrome = _isPalindrome.asStateFlow()

@@ -2,7 +2,7 @@
     <string name="app_name">SuitmediaTest</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="enter_name_text">Masukkan nama</string>
-    <string name="next_text">Next</string>
+    <string name="next_text">Selesai</string>
     <string name="choose_event">Pilih event</string>
     <string name="choose_guest">Pilih guest</string>
     <string name="input_name_actionbar">Input Name</string>
@@ -11,4 +11,5 @@
     <string name="maps">Maps</string>
     <string name="welcome">Selamat Datang!</string>
     <string name="name">Nama : %1$s</string>
+    <string name="home_message">Sertakan gambar profil anda\nuntuk melengkapi profil.</string>
 </resources>

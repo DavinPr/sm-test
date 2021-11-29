@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.suitmedia.suitmediatest.R
 import com.suitmedia.suitmediatest.databinding.FragmentInputNameBinding
 import com.suitmedia.suitmediatest.ui.home.HomeViewModel
-import com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -35,7 +36,7 @@ class InputNameFragment : Fragment() {
         }
 
         binding.btnNext.setOnClickListener {
-            viewModel.setFragment(ChoiceFragment())
+            it.findNavController().navigate(R.id.action_inputNameFragment_to_choiceFragment)
             viewModel.setName(binding.tidtName.text.toString())
         }
 

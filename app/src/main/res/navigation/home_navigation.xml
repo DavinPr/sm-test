@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/inputNameFragment">
+
+    <fragment
+        android:id="@+id/inputNameFragment"
+        android:name="com.suitmedia.suitmediatest.ui.home.inputname.InputNameFragment"
+        android:label="fragment_input_name"
+        tools:layout="@layout/fragment_input_name" >
+        <action
+            android:id="@+id/action_inputNameFragment_to_choiceFragment"
+            app:destination="@id/choiceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choiceFragment"
+        android:name="com.suitmedia.suitmediatest.ui.home.choice.ChoiceFragment"
+        android:label="fragment_choice"
+        tools:layout="@layout/fragment_choice" />
+</navigation>
